@@ -18,6 +18,26 @@ This project implements the String Calculator TDD Kata in Dart, following Test-D
 - ✅ Mixed comma and newline delimiters
 
 
-### Commit 4: Two Numbers Test
+### Step 4: Two Numbers Test
 - Add test for two numbers
 - Implement splitting and summing
+
+
+### Step 5: Negative number tests.
+- ✅Feat Handle Negative Numbers In the String.
+
+
+### Step 6: Numbers greater than 1000
+- ✅Feat Handle Numbers > 1000 are ignored.
+
+
+### Step 7: Multi-character delimiter
+- ✅Feat Multi-character delimiter.
+
+
+### Step 8: Multiple delimiters
+- ✅Multiple delimiters.
+
+
+### Step 9: Multiple multi-character delimiters
+- ✅Multiple delimiters.

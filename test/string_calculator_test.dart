@@ -51,17 +51,33 @@ void main() {
     // Step 5 Tests: Multiple negatives in exception message
     test('Step 5b: Multiple negatives in exception message', () {
       expect(
-              () => calculator.add('1,-2,-3'),
-          throwsA(predicate((e) =>
-          e is ArgumentError &&
-              e.message.contains('-2') &&
-              e.message.contains('-3')
-          ))
+        () => calculator.add('1,-2,-3'),
+        throwsA(
+          predicate(
+            (e) =>
+                e is ArgumentError &&
+                e.message.contains('-2') &&
+                e.message.contains('-3'),
+          ),
+        ),
       );
     });
-    // Step 5 Tests: Numbers > 1000 are ignored
+
+    // Step 6 Tests: Numbers > 1000 are ignored
     test('Step 6a: Numbers > 1000 are ignored', () {
       expect(calculator.add('2,1001'), equals(2));
+    });
+    // Step 7 Tests: Multi-character delimiter
+    test('Step 7: Multi-character delimiter', () {
+      expect(calculator.add('//[***]\n1***2***3'), equals(6));
+    });
+    // Step 8 Multiple delimiters
+    test('Step 8: Multiple delimiters', () {
+      expect(calculator.add('//[*][%]\n1*2%3'), equals(6));
+    });
+    // Step 9 Multiple multi-character delimiters
+    test('Step 9: Multiple multi-character delimiters', () {
+      expect(calculator.add('//[***][%%%]\n1***2%%%3'), equals(6));
     });
   });
 }

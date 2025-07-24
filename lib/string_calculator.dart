@@ -1,47 +1,84 @@
 class StringCalculator {
   int add(String numbers) {
-    if (numbers.isEmpty) return 0;
-
-    String delimiter = ',';
-    String numberSection = numbers;
-
-    // Handle custom delimiter
-    if (numbers.startsWith('//')) {
-      final delimiterEnd = numbers.indexOf('\n');
-      delimiter = numbers.substring(2, delimiterEnd);
-      numberSection = numbers.substring(delimiterEnd + 1);
+    // Handle empty string
+    if (numbers.isEmpty) {
+      return 0;
     }
 
-    // Replace newline with delimiter
-    numberSection = numberSection.replaceAll('\n', delimiter);
+    // Check for custom delimiter
+    String delimiter = ',';
+    String numbersToProcess = numbers;
+    List<String> delimiters = [','];
 
-    // Split using the correct delimiter
-    List<String> numberList = numberSection.split(delimiter);
+    if (numbers.startsWith('//')) {
+      var parts = numbers.split('\n');
+      var delimiterLine = parts[0].substring(2);
+      numbersToProcess = parts.sublist(1).join('\n');
 
-    int sum = 0;
-    List<int> negativeNumbers = [];
-
-    for (String numStr in numberList) {
-      if (numStr.isNotEmpty) {
-        int number = int.parse(numStr);
-
-        // Collect negative numbers
-        if (number < 0) {
-          negativeNumbers.add(number);
-        }
-
-        // Step 6: Ignore numbers > 1000
-        if (number <= 1000) {
-          sum += number;
-        }
+      // Handle multiple delimiters with any length
+      if (delimiterLine.startsWith('[') && delimiterLine.endsWith(']')) {
+        delimiters = _parseMultipleDelimiters(delimiterLine);
+      } else {
+        // Single character delimiter
+        delimiter = delimiterLine;
+        delimiters = [delimiter];
       }
     }
 
-    // Throw exception if any negative numbers found
-    if (negativeNumbers.isNotEmpty) {
-      throw ArgumentError('Negatives not allowed: ${negativeNumbers.join(', ')}');
+    // Replace newlines with commas for easier processing
+    numbersToProcess = numbersToProcess.replaceAll('\n', ',');
+
+    // Replace all custom delimiters with commas
+    for (String delim in delimiters) {
+      if (delim != ',') {
+        numbersToProcess = numbersToProcess.replaceAll(delim, ',');
+      }
     }
 
-    return sum;
+    // Split by comma and convert to integers
+    List<String> numberStrings = numbersToProcess.split(',');
+    List<int> nums = [];
+
+    for (String numStr in numberStrings) {
+      if (numStr.isNotEmpty) {
+        int num = int.parse(numStr);
+        nums.add(num);
+      }
+    }
+
+    // Check for negative numbers
+    List<int> negatives = nums.where((n) => n < 0).toList();
+    if (negatives.isNotEmpty) {
+      throw ArgumentError('negatives not allowed: ${negatives.join(', ')}');
+    }
+
+    // Ignore numbers bigger than 1000
+    nums = nums.where((n) => n <= 1000).toList();
+
+    // Sum all numbers (handles unknown amount)
+    return nums.fold(0, (sum, num) => sum + num);
+  }
+
+  // Helper method to parse multiple delimiters
+  List<String> _parseMultipleDelimiters(String delimiterLine) {
+    List<String> delimiters = [];
+    int i = 0;
+
+    while (i < delimiterLine.length) {
+      if (delimiterLine[i] == '[') {
+        int endIndex = delimiterLine.indexOf(']', i);
+        if (endIndex != -1) {
+          String delimiter = delimiterLine.substring(i + 1, endIndex);
+          delimiters.add(delimiter);
+          i = endIndex + 1;
+        } else {
+          i++;
+        }
+      } else {
+        i++;
+      }
+    }
+
+    return delimiters;
   }
 }
