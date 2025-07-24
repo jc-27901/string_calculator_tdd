@@ -11,3 +11,8 @@ This project implements the String Calculator TDD Kata in Dart, following Test-D
 
 ### Step 2: Unknown Amount of Numbers
 - ✅ Can handle any number of comma-separated values
+
+
+### Step 3: Handle New Lines
+- ✅ Supports newline (`\n`) as delimiter
+- ✅ Mixed comma and newline delimiters

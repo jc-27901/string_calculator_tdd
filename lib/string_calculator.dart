@@ -1,12 +1,15 @@
 class StringCalculator {
   int add(String numbers) {
-    // Step 1: Handle empty string
+    // Handle empty string
     if (numbers.isEmpty) {
       return 0;
     }
 
-    // Split by comma to handle both single number and two numbers
-    List<String> numberList = numbers.split(',');
+    // Replace newlines with commas for easier processing
+    String processedNumbers = numbers.replaceAll('\n', ',');
+
+    // Split by comma to handle single, two, or multiple numbers
+    List<String> numberList = processedNumbers.split(',');
 
     // Convert strings to integers and sum them
     int sum = 0;

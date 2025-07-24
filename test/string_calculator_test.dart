@@ -34,5 +34,10 @@ void main() {
         expect(calculator.add('10,20,30,40'), equals(100));
       });
     });
+
+    // Step 2 Tests: Handle New Lines delimiter
+    test('Step 3: Handle newline delimiter', () {
+      expect(calculator.add('1\n2,3'), equals(6));
+    });
   });
 }
