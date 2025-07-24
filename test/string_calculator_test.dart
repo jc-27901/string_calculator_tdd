@@ -35,9 +35,14 @@ void main() {
       });
     });
 
-    // Step 2 Tests: Handle New Lines delimiter
+    // Step 3 Tests: Handle New Lines delimiter
     test('Step 3: Handle newline delimiter', () {
       expect(calculator.add('1\n2,3'), equals(6));
+    });
+
+    // Step 4 Tests: Handle Custom delimiter
+    test('Step 4: Custom delimiter', () {
+      expect(calculator.add('//;\n1;2'), equals(3));
     });
   });
 }

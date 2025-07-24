@@ -16,3 +16,8 @@ This project implements the String Calculator TDD Kata in Dart, following Test-D
 ### Step 3: Handle New Lines
 - ✅ Supports newline (`\n`) as delimiter
 - ✅ Mixed comma and newline delimiters
+
+
+### Commit 4: Two Numbers Test
+- Add test for two numbers
+- Implement splitting and summing

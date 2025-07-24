@@ -1,17 +1,25 @@
 class StringCalculator {
   int add(String numbers) {
-    // Handle empty string
-    if (numbers.isEmpty) {
-      return 0;
+    // Handle Empty
+    if (numbers.isEmpty) return 0;
+
+    String delimiter = ',';
+    String numberSection = numbers;
+
+    //Handle custom delimiter
+    if (numbers.startsWith('//')) {
+      final delimiterEnd = numbers.indexOf('\n');
+      delimiter = numbers.substring(2, delimiterEnd);
+      numberSection = numbers.substring(delimiterEnd + 1);
     }
 
-    // Replace newlines with commas for easier processing
-    String processedNumbers = numbers.replaceAll('\n', ',');
+    //Replace newline with delimiter
+    numberSection = numberSection.replaceAll('\n', delimiter);
 
-    // Split by comma to handle single, two, or multiple numbers
-    List<String> numberList = processedNumbers.split(',');
+    // Split using the correct delimiter
+    List<String> numberList = numberSection.split(delimiter);
 
-    // Convert strings to integers and sum them
+    // Convert and sum
     int sum = 0;
     for (String numStr in numberList) {
       if (numStr.isNotEmpty) {
