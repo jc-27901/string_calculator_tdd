@@ -7,3 +7,7 @@ This project implements the String Calculator TDD Kata in Dart, following Test-D
 - ✅ Handles empty string (returns 0)
 - ✅ Handles single number
 - ✅ Handles two numbers separated by comma
+
+
+### Step 2: Unknown Amount of Numbers
+- ✅ Can handle any number of comma-separated values

@@ -25,5 +25,14 @@ void main() {
         expect(calculator.add('3,4'), equals(7));
       });
     });
+
+    // Step 2 Tests: Unknown amount of numbers
+    group('Step 2: Handle unknown amount of numbers', () {
+      test('should handle multiple numbers', () {
+        expect(calculator.add('1,2,3'), equals(6));
+        expect(calculator.add('1,2,3,4,5'), equals(15));
+        expect(calculator.add('10,20,30,40'), equals(100));
+      });
+    });
   });
 }
