@@ -44,5 +44,20 @@ void main() {
     test('Step 4: Custom delimiter', () {
       expect(calculator.add('//;\n1;2'), equals(3));
     });
+    // Step 5 Tests: Single negative throws exception
+    test('Step 5a: Single negative throws exception', () {
+      expect(() => calculator.add('-1'), throwsArgumentError);
+    });
+    // Step 5 Tests: Multiple negatives in exception message
+    test('Step 5b: Multiple negatives in exception message', () {
+      expect(
+              () => calculator.add('1,-2,-3'),
+          throwsA(predicate((e) =>
+          e is ArgumentError &&
+              e.message.contains('-2') &&
+              e.message.contains('-3')
+          ))
+      );
+    });
   });
 }
