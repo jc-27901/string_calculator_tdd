@@ -24,14 +24,20 @@ class StringCalculator {
     for (String numStr in numberList) {
       if (numStr.isNotEmpty) {
         int number = int.parse(numStr);
+
+        // Collect negative numbers
         if (number < 0) {
           negativeNumbers.add(number);
         }
-        sum += number;
+
+        // Step 6: Ignore numbers > 1000
+        if (number <= 1000) {
+          sum += number;
+        }
       }
     }
 
-    // Throw exception if negatives found
+    // Throw exception if any negative numbers found
     if (negativeNumbers.isNotEmpty) {
       throw ArgumentError('Negatives not allowed: ${negativeNumbers.join(', ')}');
     }

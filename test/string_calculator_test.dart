@@ -59,5 +59,9 @@ void main() {
           ))
       );
     });
+    // Step 5 Tests: Numbers > 1000 are ignored
+    test('Step 6a: Numbers > 1000 are ignored', () {
+      expect(calculator.add('2,1001'), equals(2));
+    });
   });
 }
